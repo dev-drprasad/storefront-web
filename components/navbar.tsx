@@ -12,6 +12,7 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
 
 import SignupDialog from "./SignupDialog";
+import SiteLogo from "./SiteLogo";
 
 export const Navbar = () => {
   const searchInput = (
@@ -35,17 +36,16 @@ export const Navbar = () => {
     <NextUINavbar maxWidth="full" position="sticky">
       <NavbarContent className="w-2/3" as="div">
         <NavbarBrand>
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
+          <NextLink
+            className="flex justify-start items-center gap-1 w-16"
+            href="/"
+          >
+            <SiteLogo />
           </NextLink>
         </NavbarBrand>
         {searchInput}
-        <div className="flex">
+        <div className="flex gap-24">
           <ThemeSwitch />
-          <Button variant="light" color="primary">
-            Login
-          </Button>
           <SignupDialog />
         </div>
       </NavbarContent>

@@ -1,10 +1,16 @@
-const rewrites = () => {
-  return [
-    {
-      source: "/api",
-      destination: "http://localhost:8080",
-    },
-  ];
+const overwrites = [
+  {
+    source: "/api/store/:path*",
+    destination: "http://localhost:9090/api/:path*",
+  },
+  {
+    source: "/media/:path*",
+    destination: "http://localhost:9090/media/:path*",
+  }
+]
+
+const rewrites = async () => {
+  return overwrites;
 };
 
 /** @type {import('next').NextConfig} */

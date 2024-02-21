@@ -13,6 +13,7 @@ import { Input } from "@nextui-org/input";
 import { useForm } from "react-hook-form";
 import { LockIcon, MailIcon } from "./icons";
 import { useSession, signIn } from "next-auth/react";
+import { UserAvatar } from "@/features";
 
 const SignupDialog = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -26,16 +27,19 @@ const SignupDialog = () => {
     mode: "onBlur",
   });
 
-  const handleSubmit = (data) => {};
-
   const emailRegister = register("email", { required: true });
   const passwordRegister = register("password", { required: true });
 
   return (
     <>
-      <Button onPress={onOpen} variant="light" color="primary">
-        Signup
-      </Button>
+      {status === "authenticated" ? (
+        <UserAvatar />
+      ) : (
+        <Button onPress={onOpen} variant="light" color="primary">
+          Signup
+        </Button>
+      )}
+
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
