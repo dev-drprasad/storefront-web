@@ -1,9 +1,11 @@
 import { title } from "@/components/primitives";
 import ProductCard from "./ProductCard";
+import { getToken } from "next-auth/jwt";
 
 import { Product } from "../types";
 import Categories from "./Categories";
 import { Category } from "@/types";
+import { getServerSession } from "next-auth";
 
 export const getProducts = async () => {
   const res = await fetch("http://localhost:8080/api/products");

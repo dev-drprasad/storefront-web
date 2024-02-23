@@ -9,26 +9,14 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
-import { useForm } from "react-hook-form";
-import { LockIcon, MailIcon } from "./icons";
+
 import { useSession, signIn } from "next-auth/react";
 import { UserAvatar } from "@/features";
+import { SignupForm } from "@/features/SignupForm";
 
 const SignupDialog = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { status, data: session } = useSession();
-
-  const {
-    register,
-    handleSubmit: getHandleSubmit,
-    formState,
-  } = useForm({
-    mode: "onBlur",
-  });
-
-  const emailRegister = register("email", { required: true });
-  const passwordRegister = register("password", { required: true });
 
   return (
     <>
@@ -44,44 +32,16 @@ const SignupDialog = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">Sign up</ModalHeader>
               <ModalBody>
-                <form id="signup-form" onSubmit={getHandleSubmit(handleSubmit)}>
-                  <Input
-                    autoFocus
-                    classNames={{
-                      input:
-                        "bg-transparent" /* TODO: default `!bg-transparent` not working, so added again */,
-                    }}
-                    endContent={
-                      <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                    }
-                    label="Email"
-                    placeholder="Enter your email"
-                    variant="bordered"
-                    type="email"
-                    isRequired
-                    {...emailRegister}
-                  />
-                  <Input
-                    endContent={
-                      <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                    }
-                    classNames={{
-                      input:
-                        "bg-transparent" /* TODO: default `!bg-transparent` not working, so added again */,
-                    }}
-                    label="Password"
-                    placeholder="Enter your password"
-                    type="password"
-                    variant="bordered"
-                    isRequired
-                    {...passwordRegister}
-                  />
-                </form>
-                <Button color="primary" onClick={() => signIn("google")}>
+                <Button
+                  className="mb-4"
+                  color="primary"
+                  onClick={() => signIn("google")}
+                >
                   Sign-in using Google
                 </Button>
+                <SignupForm />
               </ModalBody>
               <ModalFooter>
                 <Button variant="flat" onPress={onClose}>

@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { User } from "../types";
 
 export function useUser() {
-  const { status, data: session } = useSession();
+  const { status, data: session, update } = useSession({ required: true });
 
   if (status !== "authenticated") {
     throw new Error("user is not authenticated");

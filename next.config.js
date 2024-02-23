@@ -1,7 +1,7 @@
 const overwrites = [
   {
-    source: "/api/store/:path*",
-    destination: "http://localhost:9090/api/:path*",
+    source: "/api/storefront/:path*",
+    destination: "http://localhost:9090/api/storefront/:path*",
   },
   {
     source: "/media/:path*",
