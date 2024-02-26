@@ -1,10 +1,12 @@
 import { PasswordField } from "@/components";
 import { MailIcon } from "@/components/icons";
 import { Input } from "@nextui-org/input";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export function SignupForm() {
-  const { fields, onSubmit, errors } = useSignUpForm();
+  const { fields, onSubmit, errors, isSigningUp } = useSignUpForm();
 
   return (
     <form id="signup-form" noValidate onSubmit={onSubmit}>
@@ -49,17 +51,36 @@ export function SignupForm() {
   );
 }
 
+interface IFormData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 function useSignUpForm() {
   const {
     register,
     handleSubmit: getHandleSubmit,
     formState: { errors },
     watch,
-  } = useForm<{ email: string; password: string; confirmPassword: string }>({
+  } = useForm<IFormData>({
     mode: "onBlur",
   });
 
-  const handleSubmit = () => {};
+  const [isSigningUp, setIsSigningUp] = useState(false);
+
+  const handleSubmit = async (formData: IFormData) => {
+    const { email, password, confirmPassword } = formData;
+
+    setIsSigningUp(true);
+    await signIn("credentials", {
+      email,
+      password,
+      confirmPassword,
+      callbackUrl: "/",
+    });
+    setIsSigningUp(false);
+  };
 
   const email = register("email", { required: "You must enter email" });
   const password = register("password", {
@@ -86,5 +107,6 @@ function useSignUpForm() {
       confirmPassword,
     },
     onSubmit: getHandleSubmit(handleSubmit),
+    isSigningUp,
   };
 }

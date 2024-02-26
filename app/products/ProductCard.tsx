@@ -14,7 +14,6 @@ type Props = {
 
 export default function ProductCard(props: Props) {
   const { product } = props;
-  console.log("product :>> ", product);
   return (
     <Card className="max-w-[600px] p-4">
       <CardBody>
