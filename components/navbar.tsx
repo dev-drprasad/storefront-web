@@ -11,7 +11,7 @@ import NextLink from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
 
-import SignupDialog from "./SignupDialog";
+import AuthDialog from "./AuthDialog";
 import SiteLogo from "./SiteLogo";
 
 export const Navbar = () => {
@@ -46,7 +46,7 @@ export const Navbar = () => {
         {searchInput}
         <div className="flex gap-24">
           <ThemeSwitch />
-          <SignupDialog />
+          <AuthDialog />
         </div>
       </NavbarContent>
     </NextUINavbar>

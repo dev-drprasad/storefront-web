@@ -10,13 +10,13 @@ interface Props {
   onSubmitStatusChange: (isSigningIn: boolean) => void;
 }
 
-export function SignupForm(props: Props) {
+export function SignInForm(props: Props) {
   const { onSubmitStatusChange, id } = props;
-  const { fields, onSubmit, errors, isSigningUp } = useSignUpForm();
+  const { fields, onSubmit, errors, isSigningIn } = useSignInForm();
 
   useEffect(() => {
-    onSubmitStatusChange(isSigningUp);
-  }, [isSigningUp, onSubmitStatusChange]);
+    onSubmitStatusChange(isSigningIn);
+  }, [isSigningIn, onSubmitStatusChange]);
 
   return (
     <form id={id} noValidate onSubmit={onSubmit}>
@@ -43,19 +43,10 @@ export function SignupForm(props: Props) {
       <PasswordField
         label="New Password"
         placeholder="Enter new password"
-        autoComplete="new-password"
+        autoComplete="current-password"
         isInvalid={!!errors.password}
         errorMessage={errors.password?.message}
         {...fields.password}
-      />
-      <PasswordField
-        label="Confirm Password"
-        placeholder="Confirm new password"
-        disableVisibityChange
-        autoComplete="new-password"
-        isInvalid={!!errors.confirmPassword}
-        errorMessage={errors.confirmPassword?.message}
-        {...fields.confirmPassword}
       />
     </form>
   );
@@ -64,33 +55,30 @@ export function SignupForm(props: Props) {
 interface IFormData {
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
-function useSignUpForm() {
+function useSignInForm() {
   const {
     register,
     handleSubmit: getHandleSubmit,
     formState: { errors },
-    watch,
   } = useForm<IFormData>({
     mode: "onBlur",
   });
 
-  const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const handleSubmit = async (formData: IFormData) => {
-    const { email, password, confirmPassword } = formData;
+    const { email, password } = formData;
 
-    setIsSigningUp(true);
+    setIsSigningIn(true);
     await signIn("credentials", {
       email,
       password,
-      confirmPassword,
-      _mode: "signUp",
+      _mode: "signIn",
       callbackUrl: "/",
     });
-    setIsSigningUp(false);
+    setIsSigningIn(false);
   };
 
   const email = register("email", { required: "You must enter email" });
@@ -101,23 +89,14 @@ function useSignUpForm() {
       message: "Password must have at least 8 characters",
     },
   });
-  const confirmPassword = register("confirmPassword", {
-    required: "You must confirm password",
-    validate: (confirmedPassword: string) => {
-      if (watch("password") !== confirmedPassword) {
-        return "Your passwords do not match";
-      }
-    },
-  });
 
   return {
     errors,
     fields: {
       email,
       password,
-      confirmPassword,
     },
     onSubmit: getHandleSubmit(handleSubmit),
-    isSigningUp,
+    isSigningIn,
   };
 }

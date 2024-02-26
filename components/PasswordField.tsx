@@ -1,7 +1,8 @@
 import { Input, InputProps } from "@nextui-org/input";
 import { LockIcon, EyeIcon, EyeOffIcon } from "@/components/icons";
 import { Button } from "@nextui-org/button";
-import { ForwardedRef, forwardRef, useState } from "react";
+import { ForwardedRef, forwardRef } from "react";
+import { useBoolean } from "@/shared/hooks";
 
 interface IProps extends InputProps {
   disableVisibityChange?: boolean;
@@ -50,14 +51,3 @@ export const PasswordField = forwardRef(function PasswordField_(
     />
   );
 });
-
-function useBoolean(defaultValue = false) {
-  const [value, setValue] = useState(defaultValue);
-
-  return [
-    value,
-    () => setValue((v) => !v),
-    () => setValue(true),
-    () => setValue(false),
-  ] as [boolean, VoidFn, VoidFn, VoidFn];
-}
