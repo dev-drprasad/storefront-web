@@ -4,36 +4,74 @@ import NextAuth from "next-auth";
 import GoogleAuthProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+interface SignUp {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+const handleSignUp = async (credentials: SignUp) => {
+  const response = await fetch(`${getBackendURLPrefix()}/auth/signup`, {
+    method: "POST",
+    body: JSON.stringify({
+      email: credentials.email,
+      password: credentials.password,
+      confirmPassword: credentials.confirmPassword,
+    }),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.message);
+  }
+
+  return json;
+};
+
+const handleSignIn = async (credentials: SignUp) => {
+  const response = await fetch(`${getBackendURLPrefix()}/auth/signin`, {
+    method: "POST",
+    body: JSON.stringify({
+      email: credentials.email,
+      password: credentials.password,
+    }),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.message);
+  }
+
+  return json;
+};
+
 const credentialProvider = CredentialsProvider({
   name: "Credentials",
   credentials: {
     email: { label: "Email", type: "text" },
     password: { label: "Password", type: "password" },
     confirmPassword: { label: "Confirm Password", type: "password" },
+    _mode: { type: "text" },
   },
   async authorize(credentials, req) {
     if (!credentials) throw new Error("credentials are not defined");
 
-    const response = await fetch(`${getBackendURLPrefix()}/auth/signup`, {
-      method: "POST",
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-        confirmPassword: credentials.confirmPassword,
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      throw new Error(json.message);
+    let user = null;
+    if (credentials._mode === "signUp") {
+      user = handleSignUp(credentials);
+    } else {
+      user = handleSignIn(credentials);
     }
-
-    const user = json;
 
     if (!user) {
       // If you return null then an error will be displayed advising the user to check their details.
