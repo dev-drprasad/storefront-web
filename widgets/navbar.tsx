@@ -11,10 +11,10 @@ import NextLink from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { SearchIcon } from "@/components/icons";
 
-import AuthDialog from "./AuthDialog";
-import SiteLogo from "./SiteLogo";
+import SiteLogo from "../components/SiteLogo";
+import { NavBarRight } from "./NavBarRight";
 
-export const Navbar = () => {
+export function Navbar() {
   const searchInput = (
     <Input
       aria-label="Search"
@@ -44,11 +44,12 @@ export const Navbar = () => {
           </NextLink>
         </NavbarBrand>
         {searchInput}
-        <div className="flex gap-24">
+        <div className="flex gap-8">
           <ThemeSwitch />
-          <AuthDialog />
+
+          <NavBarRight />
         </div>
       </NavbarContent>
     </NextUINavbar>
   );
-};
+}

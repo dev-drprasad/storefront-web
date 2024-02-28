@@ -1,3 +1,5 @@
+"use client";
+
 import { PasswordField } from "@/components";
 import { MailIcon } from "@/components/icons";
 import { Input } from "@nextui-org/input";
@@ -7,7 +9,7 @@ import { useForm } from "react-hook-form";
 
 interface Props {
   id: string;
-  onSubmitStatusChange: (isSigningIn: boolean) => void;
+  onSubmitStatusChange?: (isSigningIn: boolean) => void;
 }
 
 export function SignupForm(props: Props) {
@@ -15,7 +17,7 @@ export function SignupForm(props: Props) {
   const { fields, onSubmit, errors, isSigningUp } = useSignUpForm();
 
   useEffect(() => {
-    onSubmitStatusChange(isSigningUp);
+    onSubmitStatusChange?.(isSigningUp);
   }, [isSigningUp, onSubmitStatusChange]);
 
   return (

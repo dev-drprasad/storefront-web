@@ -1,3 +1,4 @@
+"use client";
 import { Input, InputProps } from "@nextui-org/input";
 import { LockIcon, EyeIcon, EyeOffIcon } from "@/components/icons";
 import { Button } from "@nextui-org/button";

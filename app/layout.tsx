@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/widgets/navbar";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 
@@ -29,7 +29,6 @@ interface Props {
 }
 
 export default function RootLayout(props: Props) {
-
   const { children } = props;
   return (
     <html lang="en" suppressHydrationWarning>
