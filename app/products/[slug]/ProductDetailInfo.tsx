@@ -1,7 +1,5 @@
 import { Product } from "@/app/types";
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
-import QuantityInput from "./QuantityInput";
+import { ProductDetailBuyActions } from "./ProductDetailBuyActions";
 
 interface Props {
   product: Product;
@@ -31,15 +29,10 @@ const ProductDetailInfo = (props: Props) => {
           </span>
         </div>
       </div>
-      <div className="mb-8 grid grid-cols-3 gap-4 content-start">
-        <QuantityInput defaultValue={1} />
-        <Button size="lg" className="mr-8">
-          Add to cart
-        </Button>
-        <Button size="lg" color="primary">
-          Buy
-        </Button>
-      </div>
+      <ProductDetailBuyActions
+        itemId={product.slug}
+        price={product.sellPrice}
+      />
     </div>
   );
 };

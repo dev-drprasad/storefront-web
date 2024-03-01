@@ -7,10 +7,11 @@ export function useBoolean(defaultValue = false) {
   const setFalse = useCallback(() => setValue(false), []);
   const toggle = useCallback(() => setValue((v) => !v), []);
 
-  return [value, toggle, setTrue, setFalse] satisfies [
+  return [value, toggle, setTrue, setFalse, setValue] satisfies [
     boolean,
     VoidFn,
     VoidFn,
-    VoidFn
+    VoidFn,
+    (v: boolean) => void
   ];
 }

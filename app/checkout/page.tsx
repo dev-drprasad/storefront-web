@@ -4,6 +4,8 @@ import { ShippingAddressForm } from "@/features/ShippingAddressForm";
 import { Auth } from "@/widgets/Auth";
 import { ViewMode } from "@/widgets/authViewMode";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { BillingAddress } from "./BillingAddress";
+import { Cart } from "@/features/Cart";
 
 interface Props {}
 
@@ -11,9 +13,9 @@ async function CheckoutPage(props: Props) {
   const states = await getCountryStates();
 
   return (
-    <div className="grid grid-cols-3">
-      <div className="col-span-2">
-        <Card className="mb-8">
+    <div className="grid grid-cols-3 gap-8">
+      <div className="col-span-2 flex flex-col gap-8">
+        <Card>
           <CardHeader>Login / Signup</CardHeader>
           <CardBody className="p-4">
             <Auth defaultMode={ViewMode.SIGNIN} vertical />
@@ -25,8 +27,11 @@ async function CheckoutPage(props: Props) {
             <ShippingAddressForm states={states} />
           </CardBody>
         </Card>
+        <BillingAddress states={states} />
       </div>
-      <div className="col-span-1"></div>
+      <div className="col-span-1">
+        <Cart />
+      </div>
     </div>
   );
 }

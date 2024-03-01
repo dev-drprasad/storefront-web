@@ -2,6 +2,7 @@ import { Product } from "@/app/types";
 import React from "react";
 
 import ProductDetailCard from "./ProductDetailCard";
+import { getBackendURLPrefix } from "@/backend/utils";
 
 interface URLParams {
   slug: string;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export const getProductBySlug = async (slug: string) => {
-  const res = await fetch(`http://localhost:8080/api/products/${slug}`);
+  const res = await fetch(`${getBackendURLPrefix()}/products/${slug}`);
   const products = await res.json();
   return products as Product;
 };

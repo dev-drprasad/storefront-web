@@ -2,7 +2,7 @@
 
 import { classnames } from "@/components/primitives";
 import { Button } from "@nextui-org/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   defaultValue: number;
@@ -24,6 +24,10 @@ const useQuantityInputValue = (params: Props) => {
 const QuantityInput = (props: Props) => {
   const { onChange } = props;
   const { value, increase, decrease } = useQuantityInputValue(props);
+
+  useEffect(() => {
+    onChange(value);
+  }, [value, onChange]);
 
   return (
     <span className={`bg-default-100 p-2 ${classnames.border}`}>

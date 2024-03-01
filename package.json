@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@nextui-org/avatar": "2.0.24",
+    "@nextui-org/badge": "2.0.24",
     "@nextui-org/button": "2.0.18",
     "@nextui-org/card": "^2.0.21",
+    "@nextui-org/checkbox": "2.0.25",
     "@nextui-org/code": "2.0.16",
     "@nextui-org/divider": "2.0.25",
     "@nextui-org/image": "^2.0.21",

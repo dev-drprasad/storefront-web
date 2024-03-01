@@ -13,6 +13,7 @@ import { SearchIcon } from "@/components/icons";
 
 import SiteLogo from "../components/SiteLogo";
 import { NavBarRight } from "./NavBarRight";
+import { CartViewButton } from "@/features/CartViewButton";
 
 export function Navbar() {
   const searchInput = (
@@ -47,6 +48,7 @@ export function Navbar() {
         <div className="flex gap-8">
           <ThemeSwitch />
 
+          <CartViewButton />
           <NavBarRight />
         </div>
       </NavbarContent>
