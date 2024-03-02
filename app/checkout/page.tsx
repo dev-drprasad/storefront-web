@@ -13,8 +13,8 @@ async function CheckoutPage(props: Props) {
   const states = await getCountryStates();
 
   return (
-    <div className="grid grid-cols-3 gap-8">
-      <div className="col-span-2 flex flex-col gap-8">
+    <div className="grid grid-cols-3 gap-8 h-full">
+      <div className="col-span-2 flex flex-col gap-8 overflow-y-auto">
         <Card>
           <CardHeader>Login / Signup</CardHeader>
           <CardBody className="p-4">
@@ -30,7 +30,12 @@ async function CheckoutPage(props: Props) {
         <BillingAddress states={states} />
       </div>
       <div className="col-span-1">
-        <Cart />
+        <Card className="h-full">
+          <CardHeader>Cart</CardHeader>
+          <CardBody>
+            <Cart />
+          </CardBody>
+        </Card>
       </div>
     </div>
   );

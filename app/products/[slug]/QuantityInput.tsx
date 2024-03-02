@@ -1,7 +1,6 @@
 "use client";
 
-import { classnames } from "@/components/primitives";
-import { Button } from "@nextui-org/button";
+import { IncDecButtons } from "@/features/IncDecButtons";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -30,16 +29,11 @@ const QuantityInput = (props: Props) => {
   }, [value, onChange]);
 
   return (
-    <span className={`bg-default-100 p-2 ${classnames.border}`}>
-      <span>Quantity: </span>
-      <Button size="sm" onClick={decrease} isIconOnly>
-        −
-      </Button>
-      <span className="w-16 inline-block text-center">{value}</span>
-      <Button size="sm" onClick={increase} isIconOnly>
-        +
-      </Button>
-    </span>
+    <IncDecButtons
+      value={value}
+      onIncreament={increase}
+      onDecreament={decrease}
+    />
   );
 };
 

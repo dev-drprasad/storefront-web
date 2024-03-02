@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 import { Navbar } from "@/widgets/navbar";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 export const metadata: Metadata = {
   title: {
@@ -30,6 +31,7 @@ interface Props {
 
 export default function RootLayout(props: Props) {
   const { children } = props;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -42,20 +44,10 @@ export default function RootLayout(props: Props) {
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main className="container mx-auto pt-16 px-6 flex-grow">
+            <main className="container mx-auto pt-16 px-6 flex-grow h-[calc(100%-6.4rem)]">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-                title="nextui.org homepage"
-              >
-                <span className="text-default-600">Powered by</span>
-                <p className="text-primary">NextUI</p>
-              </Link>
-            </footer>
+            <footer className="w-full flex items-center justify-center py-3"></footer>
           </div>
         </Providers>
       </body>

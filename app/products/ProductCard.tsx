@@ -3,10 +3,9 @@
 import React from "react";
 import { Card, CardBody } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
-import { Progress } from "@nextui-org/progress";
 import { Image } from "@nextui-org/image";
 import { Product } from "../types";
-import { Link } from "@nextui-org/link";
+import Link from "next/link";
 
 type Props = {
   product: Product;

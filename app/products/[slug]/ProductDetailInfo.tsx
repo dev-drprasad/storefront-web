@@ -30,7 +30,8 @@ const ProductDetailInfo = (props: Props) => {
         </div>
       </div>
       <ProductDetailBuyActions
-        itemId={product.slug}
+        productTitle={product.name}
+        productId={product.slug}
         price={product.sellPrice}
       />
     </div>

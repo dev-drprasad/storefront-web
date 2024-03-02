@@ -4,29 +4,35 @@ import { Button } from "@nextui-org/button";
 import QuantityInput from "./QuantityInput";
 import { useContext, useState } from "react";
 import { CartContext } from "@/features/context";
+import { classnames } from "@/components/primitives";
 
 interface Props {
-  itemId: string;
+  productId: string;
   price: number;
+  productTitle: string;
 }
 
 export function ProductDetailBuyActions(props: Props) {
-  const { itemId, price } = props;
+  const { productId, price, productTitle } = props;
 
   const [quantity, setQuantiy] = useState(1);
   const { upsertItem } = useContext(CartContext)!;
 
   const handleAddCart = () => {
     upsertItem({
-      itemId: itemId,
+      itemId: productId,
       quantity,
       price,
+      productTitle,
     });
   };
 
   return (
     <div className="mb-8 grid grid-cols-3 gap-4 content-start">
-      <QuantityInput onChange={setQuantiy} defaultValue={1} />
+      <span className={`bg-default-100 p-2 ${classnames.border}`}>
+        <span>Quantity: </span>
+        <QuantityInput onChange={setQuantiy} defaultValue={1} />
+      </span>
       <Button size="lg" className="mr-8" onClick={handleAddCart}>
         Add to cart
       </Button>
