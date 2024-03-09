@@ -4,7 +4,7 @@ import Categories from "./Categories";
 import { Category } from "@/types";
 import { getBackendURLPrefix } from "@/backend/utils";
 
-export const getProducts = async () => {
+const getProducts = async () => {
   const res = await fetch(`${getBackendURLPrefix()}/products`);
   const products = await res.json();
   return products as Product[];

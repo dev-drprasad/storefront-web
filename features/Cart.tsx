@@ -10,14 +10,17 @@ import { CartContext } from "./context";
 import { Button } from "@nextui-org/button";
 import { TrashIcon } from "@/components/icons";
 
-interface Props {}
+interface Props {
+  className?: string;
+}
 
 export function Cart(props: Props) {
+  const { className = "" } = props;
   const { items, increaseQuantity, decreaseQuantity, removeItem } =
     useContext(CartContext)!;
 
   return (
-    <Listbox variant="flat">
+    <Listbox className={className} variant="flat">
       {Object.values(items).map((item) => (
         <ListboxItem
           className="mb-4"
