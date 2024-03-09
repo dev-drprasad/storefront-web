@@ -5,10 +5,12 @@ import { Category } from "@/types";
 import { getBackendURLPrefix } from "@/backend/utils";
 
 const getProducts = async () => {
+  console.log("getBackendURLPrefix() :>> ", getBackendURLPrefix());
   const res = await fetch(`${getBackendURLPrefix()}/products`, {
     next: { tags: ["products"] },
   });
   const products = await res.json();
+  console.log("products :>> ", products);
   return products as Product[];
 };
 
