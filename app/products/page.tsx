@@ -6,18 +6,24 @@ import { getBackendURLPrefix } from "@/backend/utils";
 
 const getProducts = async () => {
   console.log("getBackendURLPrefix() :>> ", getBackendURLPrefix());
-  const res = await fetch(`${getBackendURLPrefix()}/products`, {
-    next: { tags: ["products"] },
-  });
+  const res = await fetch(
+    `http://35.174.14.73:3000/api/storefront/v1/products`,
+    {
+      next: { tags: ["products"] },
+    }
+  );
   const products = await res.json();
   console.log("products :>> ", products);
   return products as Product[];
 };
 
 const getCategories = async () => {
-  const res = await fetch(`${getBackendURLPrefix()}/product-categories`, {
-    next: { tags: ["product-categories"] },
-  });
+  const res = await fetch(
+    `http://35.174.14.73:3000/api/storefront/v1/product-categories`,
+    {
+      next: { tags: ["product-categories"] },
+    }
+  );
   const categories = await res.json();
   return categories as Category[];
 };

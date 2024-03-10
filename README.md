@@ -21,3 +21,7 @@ npm install
 ```bash
 npm run dev
 ```
+
+### References
+
+https://www.rudderstack.com/blog/implementing-the-tag-revalidation-caching-strategy-with-nextjs-and-sanity/
