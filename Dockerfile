@@ -26,12 +26,18 @@ COPY widgets /app/widgets
 COPY pages /app/pages
 
 ENV TSC_COMPILE_ON_ERROR=true
+ARG BACKEND_API_URI
+ARG MEDIA_URI
 RUN npm run build
 
 # production environment
 FROM node:20.8-alpine
 
 EXPOSE 80
+
+ENV NEXTAUTH_SECRET
+ENV BACKEND_API_URI
+ENV MEDIA_URI
 
 WORKDIR /app
 COPY --from=build /app/.next /app
