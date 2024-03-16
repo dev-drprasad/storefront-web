@@ -40,7 +40,7 @@ ENV BACKEND_API_URI=
 ENV MEDIA_URI=
 
 WORKDIR /app
-COPY --from=build /app/.next /app
+COPY --from=build /app/.next /app/.next
 RUN ls
 RUN pwd
 RUN npm install next@13.4.19
