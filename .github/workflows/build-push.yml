@@ -34,7 +34,7 @@ jobs:
         with:
           build-args: |
             BACKEND_API_URI=${{ vars.BACKEND_API_URI }}
-            MEDIA_URL=${{ vars.MEDIA_URL }}
+            MEDIA_URI=${{ vars.MEDIA_URI }}
           file: Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository }}/storefront-web:latest
