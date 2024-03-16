@@ -12,7 +12,7 @@ interface Props {
   params: URLParams;
 }
 
-export const getProductBySlug = async (slug: string) => {
+const getProductBySlug = async (slug: string) => {
   const res = await fetch(`${getBackendURLPrefix()}/products/${slug}`);
   const products = await res.json();
   return products as Product;
