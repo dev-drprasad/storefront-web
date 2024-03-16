@@ -15,7 +15,7 @@ COPY tailwind.config.js /app
 COPY postcss.config.js /app
 COPY public /app/public
 COPY config /app/config
-COPY bakend /app/bakend
+COPY backend /app/backend
 COPY app /app/app
 COPY shared /app/shared
 COPY types /app/types
