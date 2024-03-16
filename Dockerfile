@@ -13,7 +13,6 @@ COPY tsconfig.json /app
 COPY next.config.js /app
 COPY tailwind.config.js /app
 COPY postcss.config.js /app
-COPY public /app/public
 COPY config /app/config
 COPY backend /app/backend
 COPY app /app/app
