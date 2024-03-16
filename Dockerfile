@@ -33,7 +33,7 @@ RUN npm run build
 # production environment
 FROM node:20.8-alpine
 
-EXPOSE 80
+EXPOSE 3000
 
 ENV NEXTAUTH_SECRET=
 ENV BACKEND_API_URI=
@@ -41,5 +41,6 @@ ENV MEDIA_URI=
 
 WORKDIR /app
 COPY --from=build /app/.next /app
+RUN npm install next@13.4.19
 
-CMD ["npm", "run", "start"]
+CMD ["./node_modules/.bin/next", "start"]
