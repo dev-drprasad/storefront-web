@@ -7,12 +7,7 @@ interface Props {
 
 const ProductDetailImage = (props: Props) => {
   const { imageUrls } = props;
-  return (
-    <Image
-      src={`http://localhost:8080/media/${imageUrls[0]}`}
-      alt={props.alt}
-    />
-  );
+  return <Image src={`/media/${imageUrls[0]}`} alt={props.alt} />;
 };
 
 export default ProductDetailImage;

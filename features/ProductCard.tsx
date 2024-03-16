@@ -4,7 +4,7 @@ import React from "react";
 import { Card, CardBody } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
-import { Product } from "../types";
+import { Product } from "../app/types";
 import Link from "next/link";
 
 type Props = {
@@ -16,13 +16,13 @@ export default function ProductCard(props: Props) {
   return (
     <Card className="max-w-[600px] p-4">
       <CardBody>
-        <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
+        <div className="grid grid-cols-12 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center">
           <div className="relative h-full col-span-6 md:col-span-4">
             <Image
               alt={product.name}
               className="object-cover"
               shadow="md"
-              src={`http://localhost:8080/media/${product.imageUrls[0]}`}
+              src={`/media/${product.imageUrls[0]}`}
               width="100%"
             />
           </div>
