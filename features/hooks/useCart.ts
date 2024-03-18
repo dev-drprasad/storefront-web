@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface CartItem {
   itemId: string;
@@ -10,7 +10,8 @@ interface CartItem {
 type Cart = Record<string, CartItem>;
 
 export function useCart() {
-  const [items, setItems] = useState<Cart>(() => getInitialValueFromLS());
+  const mountedRef = useRef(false);
+  const [items, setItems] = useState<Cart>({});
 
   const update = (itemId: string, quantityAdjustment: number) => {
     const existingItem = items[itemId];
@@ -50,7 +51,20 @@ export function useCart() {
     setItems(updateItems);
   };
 
-  useEffect(() => setValueInLS(items), [items]);
+  useEffect(() => {
+    if (!mountedRef.current) return;
+    // lets wait for initial value from local storage to set
+    setValueInLS(items);
+  }, [items]);
+
+  // in nextjs we can't use useState functional arg to derive initial value due text doesn't match error
+  useEffect(() => {
+    setItems(getInitialValueFromLS());
+  }, []);
+
+  useEffect(() => {
+    mountedRef.current = true;
+  }, []);
 
   return {
     items: items as Readonly<Cart>,
