@@ -4,8 +4,9 @@ import { nextui } from '@nextui-org/theme'
 module.exports = {
   content: [
     './pages/**/*.{jsx,tsx,mdx}',
-    './components/**/*.{jsx,tsx,mdx}',
+    './widgets/**/*.{jsx,tsx,mdx}',
     './features/**/*.{jsx,tsx,mdx}',
+    './components/**/*.{jsx,tsx,mdx}',
     './entities/**/*.{jsx,tsx,mdx}',
     './shared/**/*.{jsx,tsx,mdx}',
     './app/**/*.{jsx,tsx,mdx}',

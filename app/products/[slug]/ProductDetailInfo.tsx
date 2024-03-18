@@ -11,7 +11,7 @@ const ProductDetailInfo = (props: Props) => {
   return (
     <div className="grid">
       <div>
-        <h1 className="text-lg font-semibold text-foreground line-clamp-3">
+        <h1 className="text-2xl font-semibold text-foreground line-clamp-3">
           {product.name}
         </h1>
         <span className="font-semibold text-default-400">

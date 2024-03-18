@@ -1,14 +1,8 @@
 import ProductCard from "@/features/ProductCard";
-import { Product } from "../types";
 import Categories from "@/features/Categories";
 import { Category } from "@/types";
 import { getBackendURLPrefix } from "@/backend/utils";
-
-const getProducts = async () => {
-  const res = await fetch(`${getBackendURLPrefix()}/products`);
-  const products = await res.json();
-  return products as Product[];
-};
+import { fetchProducts } from "@/entities/product";
 
 const getCategories = async () => {
   const res = await fetch(`${getBackendURLPrefix()}/product-categories`);
@@ -17,7 +11,7 @@ const getCategories = async () => {
 };
 
 export default async function ProductsPage() {
-  const products = await getProducts();
+  const products = await fetchProducts();
   const categories = await getCategories();
 
   return (

@@ -7,7 +7,7 @@ const getLogoUrl = Backend.SiteConfig.getLogoUrl;
 const SiteLogo = async () => {
   const logoUrl = await getLogoUrl();
 
-  return <Image src={logoUrl} alt="site logo" />;
+  return <Image src={logoUrl} alt="site logo" width={48} />;
 };
 
 export default SiteLogo;
