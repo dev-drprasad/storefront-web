@@ -4,11 +4,13 @@ import React from "react";
 import { Card, CardBody } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
-import { Product } from "../app/types";
 import Link from "next/link";
+import Money from "@/entities/money";
+import { formatPercentage } from "@/shared/utils";
+import Product, { IProduct } from "@/entities/product";
 
 type Props = {
-  product: Product;
+  product: IProduct;
 };
 
 export default function ProductCard(props: Props) {
@@ -39,13 +41,13 @@ export default function ProductCard(props: Props) {
             </h1>
             <div className="relative flex flex-wrap items-baseline">
               <span className="relative text-lg font-semibold text-foreground">
-                ₹{product.sellPrice}
+                {Money.format(product.sellPrice)}
               </span>
               <span className="relative line-through font-semibold text-default-400 ml-3">
-                ₹350
+                {Money.format(product.mrp)}
               </span>
               <span className="relative font-normal text-success ml-3">
-                20% off
+                {formatPercentage(Product.getDiscountPercentage(product))}
               </span>
             </div>
             <div className="flex space-x-4 ">

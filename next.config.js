@@ -1,11 +1,11 @@
 const overwrites = [
   {
     source: "/api/storefront/v1/:path*",
-    destination: "http://localhost:9090/api/storefront/v1/:path*",
+    destination: `${process.env.BACKEND_API_URI}/:path*`,
   },
   {
     source: "/media/:path*",
-    destination: "http://localhost:9090/media/:path*",
+    destination: `${process.env.MEDIA_URI}/:path*`,
   }
 ]
 

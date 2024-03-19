@@ -83,6 +83,7 @@ const credentialProvider = CredentialsProvider({
 });
 
 export default NextAuth({
+  secret: process.env.AUTH_SECRET,
   providers: [
     GoogleAuthProvider({
       idToken: true,
