@@ -8,5 +8,6 @@ export async function GET(request: NextRequest) {
   console.log("path: ", path);
 
   revalidatePath("/products");
+  revalidatePath("/");
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
