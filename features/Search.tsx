@@ -2,6 +2,7 @@
 
 import { getMediaURLPrefix } from "@/backend/utils";
 import { SearchIcon } from "@/components/icons";
+import Money from "@/entities/money";
 import { useProducts } from "@/entities/product/hooks";
 
 import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete";
@@ -41,7 +42,7 @@ export function Search(props: Props) {
             <div className="flex flex-col">
               <span className="text-small">{searchItem.name}</span>
               <span className="text-tiny text-primary-400">
-                ₹ {searchItem.sellPrice}
+                {Money.format(searchItem.sellPrice)}
               </span>
             </div>
           </Link>

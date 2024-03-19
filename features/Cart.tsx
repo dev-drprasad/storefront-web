@@ -1,14 +1,12 @@
 "use client";
 
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { useCart } from "./hooks/useCart";
-import { CartItem } from "@/entities/types/Cart";
-import QuantityInput from "@/app/products/[slug]/QuantityInput";
 import { IncDecButtons } from "./IncDecButtons";
 import { useContext } from "react";
 import { CartContext } from "./context";
 import { Button } from "@nextui-org/button";
 import { TrashIcon } from "@/components/icons";
+import Money from "@/entities/money";
 
 interface Props {
   className?: string;
@@ -34,7 +32,7 @@ export function Cart(props: Props) {
                   onIncreament={() => increaseQuantity(item.itemId)}
                   onDecreament={() => decreaseQuantity(item.itemId)}
                 />
-                * {item.price}
+                * {Money.format(item.price)}
               </div>
               <Button
                 size="sm"
@@ -50,7 +48,7 @@ export function Cart(props: Props) {
         >
           <div className="flex justify-between">
             {item.productTitle}
-            <span>{item.quantity * item.price}</span>
+            <span>{Money.format(item.quantity * item.price)}</span>
           </div>
         </ListboxItem>
       ))}

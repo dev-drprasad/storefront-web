@@ -1,8 +1,10 @@
-import { Product } from "@/app/types";
 import { ProductDetailBuyActions } from "./ProductDetailBuyActions";
+import Money from "@/entities/money";
+import Product, { IProduct } from "@/entities/product";
+import { formatPercentage } from "@/shared/utils";
 
 interface Props {
-  product: Product;
+  product: IProduct;
 }
 
 const ProductDetailInfo = (props: Props) => {
@@ -19,13 +21,13 @@ const ProductDetailInfo = (props: Props) => {
         </span>
         <div className="relative flex flex-wrap items-baseline">
           <span className="relative text-lg font-semibold text-foreground">
-            ₹{product.sellPrice}
+            {Money.format(product.sellPrice)}
           </span>
           <span className="relative line-through font-semibold text-default-400 ml-3">
-            ₹350
+            {Money.format(product.mrp)}
           </span>
           <span className="relative font-normal text-success ml-3">
-            20% off
+            {formatPercentage(Product.getDiscountPercentage(product))}
           </span>
         </div>
       </div>
