@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Product, fetchProducts } from ".";
+import { IProduct, fetchProducts } from ".";
 
 export function useProducts() {
   const [[data, loading], setState] = useState<
-    [Product[] | undefined, boolean]
+    [IProduct[] | undefined, boolean]
   >([undefined, true]);
 
   useEffect(() => {
