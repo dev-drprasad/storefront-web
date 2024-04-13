@@ -4,5 +4,6 @@ export interface Product {
   sellPrice: number;
   mrp: number;
   imageUrls: string[];
+  descriptionMarkdown: string;
   slug: string;
 }

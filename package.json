@@ -45,6 +45,7 @@
     "intl-messageformat": "^10.5.0",
     "next": "13.4.19",
     "next-auth": "^4.24.5",
+    "next-mdx-remote": "4.4.1",
     "next-themes": "^0.2.1",
     "postcss": "8.4.29",
     "react": "18.2.0",
