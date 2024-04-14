@@ -42,6 +42,6 @@ ENV MEDIA_URI=
 WORKDIR /app
 COPY --from=build /app/.next /app/.next
 
-RUN npm install next@13.4.19 next-auth@4.24.5
+RUN npm install next@13.4.19 next-auth@4.24.5 next-mdx-remote@4.4.1
 
 CMD ["./node_modules/.bin/next", "start"]
