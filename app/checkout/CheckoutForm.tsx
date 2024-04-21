@@ -13,7 +13,10 @@ import { ProtectedCard } from "./ProtectedCard";
 import { ShippingAddressForm } from "@/features/ShippingAddressForm";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Button } from "@nextui-org/button";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/features/context";
+import { useSession } from "next-auth/react";
+import { getBackendURLPrefix } from "@/backend/utils";
 
 interface Props {
   states: { name: string; stateCode: string }[];
@@ -21,13 +24,11 @@ interface Props {
 
 export function CheckoutForm({ states }: Props) {
   const { fields, errors, watch, handleSubmit, unregister } = useCheckoutForm();
+  const { items } = useContext(CartContext)!;
+  const { data, status } = useSession();
 
   const [isBillingAddrSameAsShipping, setIsBillingAddrSameAsShipping] =
     useState(true);
-
-  const onSubmit = (values) => {
-    console.log("values :>> ", values);
-  };
 
   useEffect(() => {
     if (isBillingAddrSameAsShipping) {
@@ -35,6 +36,28 @@ export function CheckoutForm({ states }: Props) {
     } else {
     }
   }, [unregister, isBillingAddrSameAsShipping]);
+
+  if (!data || status !== "authenticated") return null;
+
+  const onSubmit = (values) => {
+    console.log("values :>> ", values);
+    const accessToken = (data as any).accessToken as string;
+    const payload = {
+      products: Object.entries(items).map(([productId, item]) => ({
+        productId: Number(productId),
+        quantity: item.quantity,
+      })),
+    };
+    fetch(`${getBackendURLPrefix()}/p/orders`, {
+      // currenlty in client side, API exposed. move it to server with csrf protection
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  };
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>

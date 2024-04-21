@@ -7,7 +7,7 @@ import { CartContext } from "@/features/context";
 import { classnames } from "@/components/primitives";
 
 interface Props {
-  productId: string;
+  productId: number;
   price: number;
   productTitle: string;
 }

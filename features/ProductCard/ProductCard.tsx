@@ -52,7 +52,7 @@ export default function ProductCard(props: Props) {
               </span>
             </div>
             <ProductCardActions
-              productId={product.slug}
+              productId={product.id}
               productTitle={product.name}
               price={product.sellPrice}
             />

@@ -45,7 +45,7 @@ const ProductDetailInfo = (props: Props) => {
 
         <ProductDetailBuyActions
           productTitle={product.name}
-          productId={product.slug} // why `slug` ?
+          productId={product.id}
           price={product.sellPrice}
         />
       </div>

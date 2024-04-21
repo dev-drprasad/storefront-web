@@ -4,7 +4,7 @@ import { CartContext } from "../context";
 import { useRouter } from "next/navigation";
 
 interface Props {
-  productId: string;
+  productId: number;
   price: number;
   productTitle: string;
 }

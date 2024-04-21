@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 interface CartItem {
-  itemId: string;
+  itemId: number;
   quantity: number;
   price: number;
   productTitle: string;
@@ -13,7 +13,7 @@ export function useCart() {
   const mountedRef = useRef(false);
   const [items, setItems] = useState<Cart>({});
 
-  const update = (itemId: string, quantityAdjustment: number) => {
+  const update = (itemId: number, quantityAdjustment: number) => {
     const existingItem = items[itemId];
     if (!existingItem) return;
 
