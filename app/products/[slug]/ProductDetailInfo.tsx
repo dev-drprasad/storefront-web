@@ -19,8 +19,20 @@ const ProductDetailInfo = (props: Props) => {
         <span className="font-semibold text-default-400">
           SKU: {product.id}
         </span>
-        <div className="relative flex flex-wrap items-baseline">
-          <span className="relative text-lg font-semibold text-foreground">
+        {product.bulletPoints.length > 0 && (
+          <div className="my-16">
+            <div className="font-semibold">About this item:</div>
+            <ul className="list-inside list-disc">
+              {product.bulletPoints.map((bulletPoint) => (
+                <li key={bulletPoint}>{bulletPoint}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div>
+        <div className="relative flex flex-wrap items-baseline mb-8">
+          <span className="relative text-2xl font-semibold text-foreground">
             {Money.format(product.sellPrice)}
           </span>
           <span className="relative line-through font-semibold text-default-400 ml-3">
@@ -30,12 +42,13 @@ const ProductDetailInfo = (props: Props) => {
             {formatPercentage(Product.getDiscountPercentage(product))}
           </span>
         </div>
+
+        <ProductDetailBuyActions
+          productTitle={product.name}
+          productId={product.slug} // why `slug` ?
+          price={product.sellPrice}
+        />
       </div>
-      <ProductDetailBuyActions
-        productTitle={product.name}
-        productId={product.slug}
-        price={product.sellPrice}
-      />
     </div>
   );
 };

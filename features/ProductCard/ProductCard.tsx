@@ -8,6 +8,7 @@ import Link from "next/link";
 import Money from "@/entities/money";
 import { formatPercentage } from "@/shared/utils";
 import Product, { IProduct } from "@/entities/product";
+import { ProductCardActions } from "./ProductCardActions";
 
 type Props = {
   product: IProduct;
@@ -50,12 +51,11 @@ export default function ProductCard(props: Props) {
                 {formatPercentage(Product.getDiscountPercentage(product))}
               </span>
             </div>
-            <div className="flex space-x-4 ">
-              <Button color="primary">Buy</Button>
-              <Button color="primary" variant="light">
-                Add to cart
-              </Button>
-            </div>
+            <ProductCardActions
+              productId={product.slug}
+              productTitle={product.name}
+              price={product.sellPrice}
+            />
           </div>
         </div>
       </CardBody>

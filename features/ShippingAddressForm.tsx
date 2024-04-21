@@ -3,25 +3,25 @@
 import { StateSelectField } from "@/components/StateSelectField";
 import { InputField } from "@/shared/components";
 import { Select, SelectItem } from "@nextui-org/select";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+type Form = ReturnType<typeof useForm<IFormData>>;
+type Register = Form["register"];
 
 interface Props {
   states: { name: string; stateCode: string }[];
+  register: Register;
+  errors?: Form["formState"]["errors"];
 }
 
 export function ShippingAddressForm(props: Props) {
-  const { states } = props;
-  const { fields, onSubmit, errors } = useShippingAddressForm();
+  const { states, errors = {}, register } = props;
+  if (!register) return;
+  const { fields } = getFields(register);
 
   return (
     <div>
-      <form
-        id="shipping-address"
-        className="flex flex-col gap-4"
-        noValidate
-        onSubmit={onSubmit}
-      >
+      <fieldset className="flex flex-col gap-4">
         <Select
           label="Country"
           autoComplete="shipping country"
@@ -112,12 +112,12 @@ export function ShippingAddressForm(props: Props) {
           errorMessage={errors.phoneNumber?.message}
           {...fields.phoneNumber}
         />
-      </form>
+      </fieldset>
     </div>
   );
 }
 
-interface IFormData {
+export interface IFormData {
   country: string;
   firstName: string;
   lastName: string;
@@ -129,24 +129,7 @@ interface IFormData {
   phoneNumber: string;
 }
 
-function useShippingAddressForm() {
-  const {
-    register,
-    handleSubmit: getHandleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<IFormData>({
-    mode: "onBlur",
-  });
-
-  const [isSigningUp, setIsSigningUp] = useState(false);
-
-  const handleSubmit = async (formData: IFormData) => {
-    setIsSigningUp(true);
-
-    setIsSigningUp(false);
-  };
-
+function getFields(register: Register) {
   const firstName = register("firstName", {
     required: "You must enter first name",
   });
@@ -185,7 +168,6 @@ function useShippingAddressForm() {
   });
 
   return {
-    errors,
     fields: {
       country,
       firstName,
@@ -197,7 +179,7 @@ function useShippingAddressForm() {
       zipCode,
       phoneNumber,
     },
-    onSubmit: getHandleSubmit(handleSubmit),
-    isSigningUp,
   };
 }
+
+export type { Props as IShippingAddressForm };

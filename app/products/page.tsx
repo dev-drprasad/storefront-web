@@ -1,4 +1,4 @@
-import ProductCard from "@/features/ProductCard";
+import ProductCard from "@/features/ProductCard/ProductCard";
 import Categories from "@/features/Categories";
 import { Category } from "@/types";
 import { getBackendURLPrefix } from "@/backend/utils";

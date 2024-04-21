@@ -1,4 +1,4 @@
-import ProductCard from "@/features/ProductCard";
+import ProductCard from "@/features/ProductCard/ProductCard";
 import { Product } from "../../types";
 import Categories from "@/features/Categories";
 import { Category } from "@/types";

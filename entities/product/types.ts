@@ -5,4 +5,5 @@ export interface IProduct {
   mrp: number;
   imageUrls: string[];
   slug: string;
+  bulletPoints: string[];
 }
